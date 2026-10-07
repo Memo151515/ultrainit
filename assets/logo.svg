@@ -1,0 +1,105 @@
+<svg width="900" height="260" viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dff6ff"/>
+      <stop offset="55%" stop-color="#bfe9fb"/>
+      <stop offset="100%" stop-color="#eafdf3"/>
+    </linearGradient>
+
+    <radialGradient id="orbBody" cx="35%" cy="28%" r="75%">
+      <stop offset="0%" stop-color="#eafffb"/>
+      <stop offset="18%" stop-color="#8fe9e0"/>
+      <stop offset="45%" stop-color="#22b8d8"/>
+      <stop offset="75%" stop-color="#0b7fc4"/>
+      <stop offset="100%" stop-color="#0a4f9e"/>
+    </radialGradient>
+
+    <radialGradient id="orbGloss" cx="38%" cy="22%" r="40%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="orbRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="boltGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#eaffb0"/>
+      <stop offset="100%" stop-color="#7be86b"/>
+    </linearGradient>
+
+    <linearGradient id="wordmarkGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f8fd6"/>
+      <stop offset="45%" stop-color="#0a5fb0"/>
+      <stop offset="100%" stop-color="#083f7c"/>
+    </linearGradient>
+
+    <linearGradient id="wordmarkShine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="pillGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9df0c6"/>
+      <stop offset="100%" stop-color="#2fbf78"/>
+    </linearGradient>
+
+    <clipPath id="orbClip">
+      <circle cx="130" cy="130" r="100"/>
+    </clipPath>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="260" rx="26" fill="url(#skyBg)"/>
+
+  <circle cx="760" cy="55" r="10" fill="#ffffff" opacity="0.55"/>
+  <circle cx="800" cy="90" r="5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="830" cy="45" r="6" fill="#ffffff" opacity="0.45"/>
+  <circle cx="70" cy="205" r="7" fill="#ffffff" opacity="0.4"/>
+  <circle cx="110" cy="230" r="4" fill="#ffffff" opacity="0.4"/>
+  <circle cx="620" cy="215" r="5" fill="#ffffff" opacity="0.35"/>
+  <circle cx="655" cy="230" r="9" fill="#ffffff" opacity="0.3"/>
+
+  <circle cx="132" cy="134" r="104" fill="#04305f" opacity="0.18"/>
+
+  <g>
+    <circle cx="130" cy="130" r="100" fill="url(#orbBody)"/>
+
+    <g clip-path="url(#orbClip)">
+      <path d="M -10 205 Q 130 150 270 205 L 270 260 L -10 260 Z" fill="#0a4f9e" opacity="0.35"/>
+      <path d="M -10 220 Q 130 175 270 220 L 270 260 L -10 260 Z" fill="#083f7c" opacity="0.35"/>
+    </g>
+
+    <ellipse cx="95" cy="80" rx="70" ry="46" fill="url(#orbGloss)"/>
+    <path d="M 55 45 Q 90 25 128 38" stroke="url(#orbRim)" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.8"/>
+
+    <circle cx="130" cy="130" r="100" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2"/>
+    <circle cx="130" cy="130" r="100" fill="none" stroke="#04305f" stroke-opacity="0.25" stroke-width="1"/>
+
+    <path d="M 148 62 L 96 140 L 128 140 L 112 200 L 172 118 L 136 118 Z"
+          fill="url(#boltGrad)" stroke="#ffffff" stroke-opacity="0.6" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+
+  <clipPath id="wordClip">
+    <text x="270" y="150" font-family="'Liberation Sans','Arial',sans-serif" font-weight="700" font-size="86" letter-spacing="-1">UltraInit</text>
+  </clipPath>
+
+  <g font-family="'Liberation Sans','Arial',sans-serif" font-weight="700">
+    <text x="272" y="152" font-size="86" fill="#04305f" opacity="0.35" letter-spacing="-1">UltraInit</text>
+    <text x="270" y="150" font-size="86" fill="#0a5fb0" letter-spacing="-1">UltraInit</text>
+    <g clip-path="url(#wordClip)">
+      <rect x="260" y="70" width="470" height="46" fill="#eaf6ff" opacity="0.85"/>
+      <rect x="260" y="70" width="470" height="14" fill="#ffffff" opacity="0.9"/>
+    </g>
+    <text x="270" y="150" font-size="86" fill="none" stroke="#04305f" stroke-opacity="0.3" stroke-width="1" letter-spacing="-1">UltraInit</text>
+  </g>
+
+  <rect x="273" y="172" width="150" height="38" rx="19" fill="url(#pillGrad)" stroke="#ffffff" stroke-opacity="0.7" stroke-width="1.5"/>
+  <ellipse cx="320" cy="184" rx="55" ry="9" fill="#ffffff" opacity="0.45"/>
+  <text x="348" y="197" font-family="'Liberation Sans','Arial',sans-serif" font-weight="700" font-size="18" fill="#0b3d24" text-anchor="middle" letter-spacing="1">v1.2.0</text>
+
+  <text x="273" y="228" font-family="'Liberation Sans','Arial',sans-serif" font-weight="400" font-size="19" fill="#0a4f9e" opacity="0.85">hızlı &#183; güvenli &#183; kaynak koddan derlenebilir init sistemi</text>
+</svg>

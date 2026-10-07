@@ -1,0 +1,13 @@
+# UltraInit servis betigi: sysctl (cekirdek parametreleri)
+depend() {
+    :
+}
+start() {
+    ult_log "cekirdek parametreleri uygulaniyor..."
+    if [ -r /etc/sysctl.conf ] && command -v sysctl >/dev/null 2>&1; then
+        sysctl -p /etc/sysctl.conf >/dev/null 2>&1
+    fi
+    ult_ok "sysctl tamamlandi"
+}
+stop() { :; }
+status() { ult_ok "sysctl (oneshot, her zaman basarili sayilir)"; }

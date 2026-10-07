@@ -1,0 +1,29 @@
+# UltraInit servis betigi: dbus (sistem mesaj veri yolu)
+PIDFILE="/run/ultrainit/dbus.pid"
+depend() {
+    need localmount
+}
+start() {
+    ult_log "dbus baslatiliyor..."
+    mkdir -p /run/dbus 2>/dev/null
+    if command -v dbus-daemon >/dev/null 2>&1; then
+        dbus-daemon --system --nofork &
+        echo $! > "$PIDFILE"
+        ult_ok "dbus baslatildi (pid $!)"
+    else
+        ult_fail "dbus-daemon bulunamadi"
+        exit 1
+    fi
+}
+stop() {
+    [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null
+    rm -f "$PIDFILE"
+    ult_ok "dbus durduruldu"
+}
+status() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        ult_ok "dbus calisiyor"
+    else
+        ult_log "dbus calismıyor"; exit 3
+    fi
+}

@@ -1,0 +1,13 @@
+# UltraInit servis betigi: hostname
+depend() {
+    :
+}
+start() {
+    ult_log "hostname ayarlaniyor..."
+    if [ -r /etc/hostname ]; then
+        hostname "$(cat /etc/hostname)" 2>/dev/null
+    fi
+    ult_ok "hostname tamamlandi"
+}
+stop() { :; }
+status() { ult_ok "hostname (oneshot)"; }

@@ -1,0 +1,29 @@
+# UltraInit servis betigi: sddm (grafik giris ekrani)
+PIDFILE="/run/ultrainit/sddm.pid"
+depend() {
+    need elogind
+    need udev
+}
+start() {
+    ult_log "sddm baslatiliyor..."
+    if command -v sddm >/dev/null 2>&1; then
+        sddm &
+        echo $! > "$PIDFILE"
+        ult_ok "sddm baslatildi (pid $!)"
+    else
+        ult_fail "sddm bulunamadi"
+        exit 1
+    fi
+}
+stop() {
+    [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null
+    rm -f "$PIDFILE"
+    ult_ok "sddm durduruldu"
+}
+status() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        ult_ok "sddm calisiyor"
+    else
+        ult_log "sddm calismıyor"; exit 3
+    fi
+}

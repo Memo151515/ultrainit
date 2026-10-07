@@ -1,0 +1,17 @@
+# Merkezi log toplayici. Servis cikti(lar)i, syslog (/dev/log) ve cekirdek
+# mesajlari tek bir gunluge toplanir; okumak icin: journalult
+#
+# Etkinlestirmek icin:  ult-service journald enable && ult-service reload
+# Servislerinizde:      log=journal   (journald otomatik 'want'+'after' olur)
+description=Merkezi log toplayici (ult-journald)
+exec=/usr/sbin/ult-journald
+type=simple
+# Dinleyen soket olusana kadar "starting": log=journal servisleri ilk satirdan
+# itibaren yakalanir. (ult-journald soketi atomik olarak yayinlar.)
+ready_path=/run/ultrainit/journal.stream
+restart=always
+restart_sec=1
+timeout_start=10
+timeout_stop=10
+# Kendi cikti(lar)i kendine gitmesin
+log=null

@@ -1,0 +1,41 @@
+# UltraInit yerel servis birimi ORNEGI (systemd benzeri, ama cok daha kucuk).
+# Kullanmak icin kopyalayin:   cp example.svc.sample myservice.svc
+# Sonra:                       ult-service myservice enable ; ult-service reload
+#
+# Dosya root'a ait olmali ve grup/diger tarafindan yazilamamali (chmod 644).
+
+description=Ornek servis
+
+# --- Calistirma ---
+# exec mutlak yol olmali. Tirnak destekler: exec=/usr/bin/foo --opt "iki kelime"
+exec=/usr/bin/ornek-daemon --foreground
+# stop_exec=/usr/bin/ornek-daemon --quit     # (istege bagli) ozel durdurma komutu
+
+# type: simple   -> exec edilen surec servisin kendisidir (varsayilan)
+#       forking  -> exec edilen surec daemonlasip cikar; pidfile= ile PID okunur
+#       oneshot  -> bir kez calisip biter (hazirlik isleri icin)
+type=simple
+# pidfile=/run/ornek.pid                     # type=forking icin
+
+# --- Bagimliliklar ---
+need=localmount          # zorunlu: otomatik baslatilir, basarisizsa bu servis de basarisiz olur
+want=syslog              # istege bagli: baslatilir ama basarisizligi onemsenmez
+after=udev               # sadece siralama (baslatmaz)
+before=sddm              # bu servis sddm'den once baslasin
+# conflicts=baska-servis # biri baslayinca digeri durdurulur
+# provides=net           # baska birimlerin 'need net' diyebilecegi takma ad
+
+# --- Denetim ---
+restart=on-failure       # no | on-failure | always   (hiz siniri: respawn_max / respawn_window)
+restart_sec=2
+timeout_start=30         # sn (0 = sinirsiz)
+timeout_stop=10          # sn, sonra SIGKILL
+
+# --- Ortam ---
+# user=ornek
+# group=ornek
+# workdir=/var/lib/ornek
+# umask=027
+# env=LANG=C.UTF-8
+# ready_path=/run/ornek.sock                # type=simple: bu yol olusana kadar "starting"
+log=journal              # journal (journalult ile oku) | file (/var/log/ultrainit/<ad>.log) | console | null

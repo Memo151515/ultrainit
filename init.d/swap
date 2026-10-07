@@ -1,0 +1,14 @@
+# UltraInit servis betigi: swap
+depend() {
+    need localmount
+}
+start() {
+    ult_log "swap alanlari etkinlestiriliyor..."
+    swapon -a 2>/dev/null
+    ult_ok "swap tamamlandi"
+}
+stop() {
+    swapoff -a 2>/dev/null
+    ult_ok "swap kapatildi"
+}
+status() { ult_ok "swap (oneshot)"; }

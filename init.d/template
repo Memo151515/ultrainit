@@ -1,0 +1,27 @@
+# UltraInit servis betigi sablonu
+# Kopyalayip duzenleyin: cp template <servis-adi>
+# Sonra etkinlestirin:   ult-service <servis-adi> enable
+
+depend() {
+    # Once calismasi gereken servisler:
+    # need <servis>
+    # after <servis>
+    :
+}
+
+start() {
+    ult_log "<servis> baslatiliyor..."
+    # /usr/bin/ornek-daemon --daemonize
+    ult_ok "<servis> baslatildi"
+}
+
+stop() {
+    ult_log "<servis> durduruluyor..."
+    # pkill -x ornek-daemon
+    ult_ok "<servis> durduruldu"
+}
+
+status() {
+    # Calisma durumunu kontrol edip 0 (calisiyor) / 3 (calismiyor) donun
+    ult_ok "<servis> durum kontrolu tanimlanmadi"
+}

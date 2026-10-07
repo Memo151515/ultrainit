@@ -1,0 +1,19 @@
+# UltraInit servis betigi: udev (aygit yoneticisi)
+depend() {
+    need modules
+}
+start() {
+    ult_log "udev baslatiliyor..."
+    if command -v udevd >/dev/null 2>&1; then
+        udevd --daemon 2>/dev/null
+    elif [ -x /usr/lib/systemd/systemd-udevd ]; then
+        /usr/lib/systemd/systemd-udevd --daemon 2>/dev/null
+    fi
+    command -v udevadm >/dev/null 2>&1 && udevadm trigger 2>/dev/null
+    ult_ok "udev tamamlandi"
+}
+stop() {
+    pkill -x udevd 2>/dev/null
+    ult_ok "udev durduruldu"
+}
+status() { ult_ok "udev (oneshot tetikleme)"; }

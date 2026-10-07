@@ -1,0 +1,11 @@
+# UltraInit servis betigi: hwclock (donanim saatini senkronize et)
+depend() {
+    need localmount
+}
+start() {
+    ult_log "donanim saati okunuyor..."
+    command -v hwclock >/dev/null 2>&1 && hwclock --hctosys 2>/dev/null
+    ult_ok "hwclock tamamlandi"
+}
+stop() { :; }
+status() { ult_ok "hwclock (oneshot)"; }

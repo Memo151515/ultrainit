@@ -1,0 +1,12 @@
+# UltraInit servis betigi: bootmisc (/run, /tmp gibi gecici dizinleri hazirla)
+depend() {
+    need localmount
+}
+start() {
+    ult_log "gecici dizinler hazirlaniyor..."
+    mkdir -p /run/lock /run/ultrainit 2>/dev/null
+    chmod 1777 /tmp 2>/dev/null
+    ult_ok "bootmisc tamamlandi"
+}
+stop() { :; }
+status() { ult_ok "bootmisc (oneshot)"; }

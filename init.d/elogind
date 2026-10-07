@@ -1,0 +1,32 @@
+# UltraInit servis betigi: elogind (oturum/guc yonetimi)
+PIDFILE="/run/ultrainit/elogind.pid"
+depend() {
+    need dbus
+}
+start() {
+    ult_log "elogind baslatiliyor..."
+    ELOGIND_BIN=""
+    for p in /usr/lib/elogind/elogind /usr/libexec/elogind /usr/lib/elogind /sbin/elogind; do
+        [ -x "$p" ] && ELOGIND_BIN="$p" && break
+    done
+    if [ -n "$ELOGIND_BIN" ]; then
+        "$ELOGIND_BIN" &
+        echo $! > "$PIDFILE"
+        ult_ok "elogind baslatildi (pid $!)"
+    else
+        ult_fail "elogind binary bulunamadi (denenen: /usr/lib/elogind/elogind)"
+        exit 1
+    fi
+}
+stop() {
+    [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null
+    rm -f "$PIDFILE"
+    ult_ok "elogind durduruldu"
+}
+status() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        ult_ok "elogind calisiyor"
+    else
+        ult_log "elogind calismıyor"; exit 3
+    fi
+}

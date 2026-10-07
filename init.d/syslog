@@ -1,0 +1,27 @@
+# UltraInit servis betigi: syslog
+PIDFILE="/run/ultrainit/syslog.pid"
+depend() {
+    need bootmisc
+}
+start() {
+    ult_log "syslog baslatiliyor..."
+    if command -v syslogd >/dev/null 2>&1; then
+        syslogd -n &
+        echo $! > "$PIDFILE"
+        ult_ok "syslog baslatildi (pid $!)"
+    else
+        ult_fail "syslogd bulunamadi, atlaniyor"
+    fi
+}
+stop() {
+    [ -f "$PIDFILE" ] && kill "$(cat "$PIDFILE")" 2>/dev/null
+    rm -f "$PIDFILE"
+    ult_ok "syslog durduruldu"
+}
+status() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        ult_ok "syslog calisiyor"
+    else
+        ult_log "syslog calismıyor"; exit 3
+    fi
+}

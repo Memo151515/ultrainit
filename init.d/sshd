@@ -1,0 +1,47 @@
+# UltraInit servis betigi: sshd
+PIDFILE="/run/ultrainit/sshd.pid"
+SSHD_BIN="/usr/sbin/sshd"
+
+depend() {
+    need network
+}
+
+start() {
+    ult_log "sshd baslatiliyor..."
+    if [ -x "$SSHD_BIN" ]; then
+        "$SSHD_BIN"
+        # sshd kendi ic pidfile'ini /run/sshd.pid altina yazar; bizim
+        # standardimiza (ULT_PID_DIR) kopyalayarak ultrainit'in otomatik
+        # denetime alabilmesini sagliyoruz.
+        sleep 0.2
+        if [ -f /run/sshd.pid ]; then
+            cp /run/sshd.pid "$PIDFILE"
+        elif [ -f /var/run/sshd.pid ]; then
+            cp /var/run/sshd.pid "$PIDFILE"
+        fi
+        ult_ok "sshd baslatildi"
+    else
+        ult_fail "sshd binary bulunamadi: $SSHD_BIN"
+        exit 1
+    fi
+}
+
+stop() {
+    ult_log "sshd durduruluyor..."
+    if [ -f "$PIDFILE" ]; then
+        kill "$(cat "$PIDFILE")" 2>/dev/null
+        rm -f "$PIDFILE"
+    else
+        pkill -x sshd 2>/dev/null
+    fi
+    ult_ok "sshd durduruldu"
+}
+
+status() {
+    if [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+        ult_ok "sshd calisiyor (pid $(cat "$PIDFILE"))"
+    else
+        ult_log "sshd calismıyor"
+        exit 3
+    fi
+}

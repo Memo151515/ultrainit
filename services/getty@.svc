@@ -1,0 +1,9 @@
+# UltraInit sablon birimi: getty@<tty>
+# ultrainit.conf icindeki getty_ttys listesinden her tty icin otomatik
+# orneklenir (getty@tty1, getty@tty2 ...). %i = tty adi.
+description=Konsol girisi (%i)
+exec=/sbin/agetty %i linux
+type=simple
+restart=always
+restart_sec=1
+log=null

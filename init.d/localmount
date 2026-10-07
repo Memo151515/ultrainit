@@ -1,0 +1,11 @@
+# UltraInit servis betigi: localmount (yerel dosya sistemlerini bagla)
+depend() {
+    need udev
+}
+start() {
+    ult_log "yerel dosya sistemleri baglaniyor..."
+    mount -a 2>/dev/null
+    ult_ok "localmount tamamlandi"
+}
+stop() { :; }
+status() { ult_ok "localmount (oneshot)"; }

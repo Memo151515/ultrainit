@@ -1,0 +1,19 @@
+# UltraInit servis betigi: modules (cekirdek modulleri)
+depend() {
+    :
+}
+start() {
+    ult_log "cekirdek modulleri yukleniyor..."
+    if [ -r /etc/modules-load.d ] && command -v modprobe >/dev/null 2>&1; then
+        for f in /etc/modules-load.d/*.conf; do
+            [ -r "$f" ] || continue
+            while read -r mod; do
+                case "$mod" in ''|\#*) continue ;; esac
+                modprobe "$mod" 2>/dev/null
+            done < "$f"
+        done
+    fi
+    ult_ok "modules tamamlandi"
+}
+stop() { :; }
+status() { ult_ok "modules (oneshot)"; }

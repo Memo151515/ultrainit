@@ -1,0 +1,22 @@
+# UltraInit servis betigi: network (basit ornek)
+depend() {
+    need localmount
+    provide net
+}
+start() {
+    ult_log "ag arayuzleri hazirlaniyor..."
+    if command -v ip >/dev/null 2>&1; then
+        ip link set lo up 2>/dev/null
+        ult_ok "loopback etkinlestirildi"
+    else
+        ult_fail "'ip' komutu bulunamadi"
+        exit 1
+    fi
+}
+stop() {
+    ult_log "ag arayuzleri kapatiliyor..."
+    ult_ok "yapildi"
+}
+status() {
+    ult_ok "network servisi tanimlandi (ornek)"
+}
