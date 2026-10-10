@@ -1,5 +1,4 @@
-   *.o
-   /ultrainit
-   /ult-service
-   /ult-journald
-   /journalult
+*.o/ultrainit
+/ult-service
+/ult-journald
+/journalult
